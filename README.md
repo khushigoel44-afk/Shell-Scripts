@@ -1,3 +1,5 @@
+
+---
 # System Health Check Script
 
 This script acts as a quick medical checkup for your computer or server. It tells you how well your system is running right now by checking its vital signs.
@@ -29,3 +31,55 @@ Follow these simple steps to run the checkup on your Linux or macOS terminal:
    `./health_check.sh`
 
 You will immediately see the health report printed on your screen.
+
+
+---
+
+# DevOps Backup Script
+---
+
+A simple, automated bash script to compress a source directory, save it with a timestamp, and automatically delete old backups based on a retention policy.
+
+## Day-to-Day Usefulness
+This script automates disaster recovery and storage management. In a daily DevOps workflow, it provides:
+* **Hands-free Data Protection:** Ensures critical files are backed up reliably without relying on manual human intervention.
+* **Storage Optimization:** The automated retention policy prevents server disks from filling up with stale archives.
+* **Rapid Rollbacks:** Gives you immediate access to timestamped archives to quickly recover from botched deployments, accidental deletions, or server crashes.
+
+## Configuration
+Edit the `backup.sh` file to configure your paths and retention period:
+- `SOURCE_DIR`: The directory you want to back up (e.g., `/var/www/html`).
+- `BACKUP_DIR`: The destination directory for the backup archives (e.g., `/opt/backups`).
+- `RETENTION_DAYS`: The number of days to keep backups before deleting them (default is 7).
+
+## Prerequisites
+If your `SOURCE_DIR` or `BACKUP_DIR` require elevated permissions (like `/var/www` or `/opt`), you must run this script with `sudo` or as the root user.
+
+## Usage
+
+1. **Make the script executable:**
+   ```bash
+   chmod +x backup.sh
+   ```
+2. **Run the script:**
+
+   ```Bash
+   sudo ./backup.sh
+   ```
+(Omit sudo if running purely within user-owned directories).
+
+3. **Automation (Cron Job)**
+
+   To automate the backup to run daily at 2:00 AM:
+   Open the root crontab:
+
+   ```Bash
+   sudo crontab -e
+   ```
+   Add the following line (replace /path/to/ with the actual absolute path):
+
+   ```Bash
+   0 2 * * * /path/to/backup.sh >> /var/log/backup.log 2>&1
+   ```
+
+---
